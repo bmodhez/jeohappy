@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeohappyday — Cake & Coffee Cafe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;0,800;0,900;1,800&family=Fredoka+One&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+:root {
+  --yellow: #FFC72C;
+  --yellow-dark: #e6a800;
+  --yellow-light: #FFD966;
+  --red: #DA291C;
+  --red-dark: #B8200F;
+  --white: #FFFFFF;
+  --off-white: #FFF9F0;
+  --cream: #FFF5E0;
+  --dark: #1A1A1A;
+  --mid: #2C2C2C;
+  --gray: #6B6B6B;
+  --light-gray: #F5F5F5;
+  --border: rgba(0,0,0,0.08);
+  --font-display: 'Fredoka One', cursive;
+  --font-body: 'Nunito', sans-serif;
+  --radius: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 100px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; background: var(--white); }
+body { font-family: var(--font-body); background: var(--white); color: var(--dark); overflow-x: hidden; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--yellow); border-radius: 3px; }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+  background: rgba(18,18,18,0.55);
+  backdrop-filter: blur(14px) saturate(130%);
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  padding: 0 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 70px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.nav-glass { background: rgba(18,18,18,0.72); box-shadow: 0 10px 30px rgba(0,0,0,0.35); border-bottom-color: rgba(255,255,255,0.12); }
+.nav-logo { display: flex; align-items: center; gap: 6px; text-decoration: none; }
+.nav-logo-icon { width: 52px; height: 52px; background: transparent; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.nav-logo-icon img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.nav-logo-text { font-family: 'Pacifico', var(--font-display); font-size: 22px; color: var(--white); font-weight: 400; display: flex; align-items: flex-end; gap: 3px; white-space: nowrap; }
+.nav-logo-text .brand-jeo { color: #f5f5f5; }
+.nav-logo-text .brand-happy { color: var(--yellow); font-family: var(--font-body); font-weight: 900; font-size: 16px; }
+.nav-logo-text .brand-day { color: var(--white); font-family: var(--font-body); font-weight: 900; font-size: 16px; }
+.nav-links { display: flex; gap: 6px; list-style: none; }
+.nav-links a { font-family: var(--font-body); font-size: 13px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; color: rgba(255,255,255,0.65); text-decoration: none; padding: 7px 12px; border-radius: var(--radius-pill); transition: color .2s, background .2s; }
+.nav-links a:hover { color: var(--yellow); background: rgba(255,199,44,0.1); }
+.nav-cta { display: flex; align-items: center; gap: 8px; background: var(--yellow); color: var(--dark); font-family: var(--font-body); font-size: 14px; font-weight: 900; padding: 10px 20px; border-radius: var(--radius-pill); text-decoration: none; transition: background .2s, transform .2s; white-space: nowrap; flex-shrink: 0; }
+.nav-cta:hover { background: var(--yellow-dark); transform: translateY(-1px); }
+.nav-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; animation: blink 2s infinite; flex-shrink: 0; }
+@keyframes blink { 0%,100%{opacity:1}50%{opacity:0.2} }
+
+/* ─── HERO ─── */
+#hero { min-height: 100vh; background: var(--dark) url('hero.jpeg') center/cover no-repeat; padding: 70px 0 0; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+#hero::before { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.62); z-index: 1; }
+.hero-yellow-blob { position: absolute; top: -120px; right: -120px; width: 600px; height: 600px; background: var(--yellow); border-radius: 50%; opacity: 0.08; }
+.hero-red-blob { position: absolute; bottom: -80px; left: -80px; width: 400px; height: 400px; background: var(--red); border-radius: 50%; opacity: 0.07; }
+.hero-main { flex: 1; display: flex; align-items: center; padding: 60px 64px; gap: 60px; position: relative; z-index: 2; }
+.hero-left { flex: 1; min-width: 0; }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,199,44,0.12); border: 1.5px solid rgba(255,199,44,0.3); color: var(--yellow); border-radius: var(--radius-pill); font-size: 13px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; padding: 7px 18px; margin-bottom: 28px; animation: fadeUp .5s .1s both; }
+.hero-h1 { font-family: var(--font-display); font-size: clamp(48px, 6vw, 96px); line-height: 1; color: var(--white); margin-bottom: 20px; animation: fadeUp .5s .2s both; }
+.hero-h1 .yellow { color: var(--yellow); }
+.hero-h1 .red { color: var(--red); }
+.hero-sub { font-size: 15px; line-height: 1.8; color: rgba(255,255,255,0.55); font-weight: 400; max-width: 440px; margin-bottom: 40px; animation: fadeUp .5s .3s both; }
+.hero-sub strong { color: var(--white); font-weight: 800; }
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; animation: fadeUp .5s .4s both; }
+.btn-yellow { display: inline-flex; align-items: center; gap: 8px; background: var(--yellow); color: var(--dark); font-family: var(--font-body); font-size: 16px; font-weight: 900; padding: 15px 28px; border-radius: var(--radius-pill); text-decoration: none; border: none; cursor: pointer; transition: background .2s, transform .15s; }
+.btn-yellow:hover { background: var(--yellow-dark); transform: translateY(-2px); }
+.btn-outline { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--white); font-family: var(--font-body); font-size: 16px; font-weight: 800; padding: 14px 28px; border-radius: var(--radius-pill); border: 2px solid rgba(255,255,255,0.2); text-decoration: none; cursor: pointer; transition: border-color .2s, transform .15s; }
+.btn-outline:hover { border-color: rgba(255,255,255,0.6); transform: translateY(-2px); }
+.hero-stats { display: flex; gap: 32px; margin-top: 48px; flex-wrap: wrap; animation: fadeUp .5s .5s both; }
+.hero-stat-num { font-family: var(--font-display); font-size: 36px; color: var(--white); line-height: 1; }
+.hero-stat-num .accent { color: var(--yellow); }
+.hero-stat-label { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+.hero-right { flex-shrink: 0; width: 280px; display: flex; flex-direction: column; gap: 14px; animation: fadeUp .6s .55s both; }
+.hero-card { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.18); backdrop-filter: blur(14px) saturate(140%); -webkit-backdrop-filter: blur(14px) saturate(140%); border-radius: var(--radius-lg); padding: 20px 22px; }
+.hero-card-label { font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 6px; }
+.hero-card-val { font-family: var(--font-display); font-size: 28px; color: var(--white); line-height: 1; }
+.hero-card-sub { font-size: 12px; color: rgba(255,255,255,0.35); margin-top: 4px; }
+.hero-open-pill { display: flex; align-items: center; gap: 10px; background: rgba(34,197,94,0.2); border: 1.5px solid rgba(34,197,94,0.35); backdrop-filter: blur(12px) saturate(140%); -webkit-backdrop-filter: blur(12px) saturate(140%); border-radius: var(--radius-pill); padding: 13px 20px; font-family: var(--font-body); font-size: 14px; font-weight: 800; color: #86efac; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+
+/* ─── TICKER ─── */
+.ticker { background: var(--yellow); padding: 13px 0; overflow: hidden; white-space: nowrap; }
+.ticker-inner { display: inline-flex; animation: ticker 22s linear infinite; }
+.ticker-item { font-family: var(--font-body); font-size: 13px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; color: var(--dark); padding: 0 28px; }
+.ticker-sep { color: var(--red); padding: 0 6px; }
+@keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ─── SECTION BASE ─── */
+section { padding: 88px 64px; }
+.sec-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,199,44,0.12); border: 1.5px solid rgba(255,199,44,0.3); color: #b8860b; border-radius: var(--radius-pill); font-size: 12px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; padding: 6px 16px; margin-bottom: 16px; }
+.sec-title { font-family: var(--font-display); font-size: clamp(32px, 4vw, 60px); line-height: 1.05; margin-bottom: 12px; color: var(--dark); }
+.sec-title .yellow { color: var(--yellow-dark); }
+.sec-title .red { color: var(--red); }
+
+/* ─── ABOUT ─── */
+#about { background: var(--off-white); }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-top: 48px; }
+.about-visual { background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)), url('sidehero.jpg') center 35%/90% auto no-repeat; border-radius: var(--radius-lg); aspect-ratio: 4/5; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.about-visual-arc { position: absolute; bottom: 0; left: 0; right: 0; height: 45%; background: var(--red); border-radius: 120% 120% 0 0 / 60% 60% 0 0; }
+.about-visual-icon { font-size: 90px; position: relative; z-index: 2; margin-bottom: 12px; }
+.about-rating-badge { position: absolute; top: 20px; right: 20px; z-index: 3; background: var(--dark); color: var(--yellow); border-radius: var(--radius); padding: 10px 14px; font-family: var(--font-display); font-size: 20px; text-align: center; }
+.about-rating-badge small { display: block; font-family: var(--font-body); font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; }
+.about-body { font-size: 15px; line-height: 1.85; color: var(--gray); font-weight: 400; margin-bottom: 28px; }
+.about-body strong { color: var(--dark); font-weight: 800; }
+.about-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+.fact-card { background: var(--white); border-radius: var(--radius); border: 2px solid var(--border); padding: 18px; transition: border-color .2s, transform .2s; }
+.fact-card:hover { border-color: var(--yellow); transform: translateY(-3px); }
+.fact-emoji { font-size: 24px; margin-bottom: 6px; }
+.fact-num { font-family: var(--font-display); font-size: 28px; color: var(--dark); line-height: 1; }
+.fact-label { font-size: 11px; font-weight: 700; color: var(--gray); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { background: var(--cream); border: 1.5px solid rgba(218,41,28,0.15); border-radius: var(--radius-pill); padding: 7px 14px; font-size: 13px; font-weight: 700; color: var(--dark); display: flex; align-items: center; gap: 6px; }
+
+/* ─── MENU ─── */
+#menu { background: var(--white); }
+.menu-header { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; margin-bottom: 28px; }
+.menu-note { font-size: 13px; color: var(--gray); font-weight: 600; }
+.menu-cats { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 36px; }
+.menu-cat { font-family: var(--font-body); font-size: 13px; font-weight: 800; padding: 9px 20px; background: var(--light-gray); border: 2px solid transparent; border-radius: var(--radius-pill); color: var(--gray); cursor: pointer; transition: all .2s; }
+.menu-cat.active { background: var(--yellow); color: var(--dark); border-color: var(--yellow-dark); }
+.menu-cat:hover:not(.active) { background: var(--cream); border-color: var(--yellow); color: var(--dark); }
+.menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; }
+.menu-card { background: var(--white); border: 2px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; transition: transform .25s, border-color .25s, box-shadow .25s; cursor: pointer; }
+.menu-card:hover { transform: translateY(-6px); border-color: var(--yellow); box-shadow: 0 16px 40px rgba(255,199,44,0.2); }
+.menu-img { height: 160px; background: var(--cream); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.menu-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.menu-badge { position: absolute; top: 10px; left: 10px; background: var(--red); color: white; font-family: var(--font-body); font-size: 10px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; padding: 4px 10px; border-radius: var(--radius-pill); }
+.menu-badge.yellow-badge { background: var(--yellow); color: var(--dark); }
+.menu-info { padding: 16px 18px 18px; }
+.menu-name { font-family: var(--font-display); font-size: 19px; color: var(--dark); margin-bottom: 5px; }
+.menu-desc { font-size: 12px; color: var(--gray); line-height: 1.6; font-weight: 500; margin-bottom: 14px; }
+.menu-footer { display: flex; align-items: center; justify-content: space-between; }
+.menu-price { font-family: var(--font-display); font-size: 21px; color: var(--dark); }
+.menu-price span { color: var(--red); }
+.menu-add-btn { background: var(--yellow); color: var(--dark); border: none; width: 34px; height: 34px; border-radius: 50%; font-size: 20px; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s, transform .1s; line-height: 1; }
+.menu-add-btn:hover { background: var(--yellow-dark); transform: scale(1.1); }
+
+/* ─── CTA BANNER ─── */
+.cta-banner { background: var(--red); padding: 72px 64px; display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+.cta-banner-tag { font-size: 12px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 10px; }
+.cta-banner-title { font-family: var(--font-display); font-size: clamp(36px, 4.5vw, 72px); color: var(--white); line-height: 1; margin-bottom: 8px; }
+.cta-banner-title .y { color: var(--yellow); }
+.cta-banner-sub { font-size: 15px; color: rgba(255,255,255,0.7); font-weight: 600; }
+.btn-white { display: inline-flex; align-items: center; gap: 10px; background: var(--white); color: var(--red); font-family: var(--font-body); font-size: 15px; font-weight: 900; padding: 16px 36px; border-radius: var(--radius-pill); border: none; text-decoration: none; white-space: nowrap; transition: transform .2s, box-shadow .2s; }
+.btn-white:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
+
+/* ─── WHY ─── */
+#why { background: var(--cream); }
+.why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 48px; }
+.why-card { background: var(--white); border-radius: var(--radius-lg); border: 2px solid var(--border); padding: 28px 22px; position: relative; transition: border-color .25s, transform .25s; }
+.why-card:hover { border-color: var(--yellow); transform: translateY(-4px); }
+.why-card-num { font-family: var(--font-display); font-size: 52px; color: rgba(255,199,44,0.2); position: absolute; top: 14px; right: 16px; line-height: 1; }
+.why-emoji { font-size: 32px; margin-bottom: 12px; }
+.why-title { font-family: var(--font-display); font-size: 17px; color: var(--dark); margin-bottom: 8px; }
+.why-text { font-size: 13px; color: var(--gray); line-height: 1.7; font-weight: 500; }
+
+/* ─── REVIEWS ─── */
+#reviews { background: var(--white); }
+.reviews-meta { font-size: 14px; color: var(--gray); font-weight: 700; margin-top: 6px; }
+.marquee-wrap { overflow: hidden; margin-top: 44px; }
+.marquee-track { display: flex; gap: 18px; animation: marquee 28s linear infinite; }
+@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.review-card { flex-shrink: 0; width: 300px; background: var(--off-white); border: 2px solid var(--border); border-radius: var(--radius-lg); padding: 24px; transition: border-color .2s; }
+.review-card:hover { border-color: var(--yellow); }
+.review-stars { color: var(--yellow); font-size: 15px; letter-spacing: 2px; margin-bottom: 12px; }
+.review-text { font-size: 13px; line-height: 1.7; color: var(--gray); font-weight: 600; margin-bottom: 18px; }
+.review-author { display: flex; align-items: center; gap: 10px; }
+.review-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--yellow); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 15px; color: var(--dark); flex-shrink: 0; }
+.review-name { font-family: var(--font-display); font-size: 14px; color: var(--dark); }
+.review-role { font-size: 11px; color: var(--gray); font-weight: 600; }
+
+/* ─── RESERVATION ─── */
+#reservation { background: var(--dark); }
+#reservation .sec-tag { background: rgba(255,199,44,0.15); border-color: rgba(255,199,44,0.35); color: var(--yellow-dark); }
+#reservation .sec-title { color: var(--white); }
+#reservation .sec-title .yellow { color: var(--yellow); }
+.res-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; margin-top: 48px; align-items: start; }
+.res-desc { font-size: 14px; color: rgba(255,255,255,0.5); font-weight: 500; line-height: 1.8; margin-bottom: 32px; }
+.res-info-list { display: flex; flex-direction: column; }
+.res-row { display: flex; align-items: flex-start; gap: 14px; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+.res-row:last-child { border-bottom: none; }
+.res-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+.res-row-label { font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 4px; }
+.res-row-val { font-size: 13px; color: rgba(255,255,255,0.8); font-weight: 600; line-height: 1.6; }
+.res-form { background: var(--white); border-radius: var(--radius-lg); padding: 32px; border-top: 5px solid var(--yellow); }
+.form-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.fg { display: flex; flex-direction: column; gap: 5px; }
+.fl { font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray); }
+.fi, .fse, .fta { background: var(--light-gray); border: 2px solid var(--border); border-radius: var(--radius); padding: 11px 14px; font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--dark); outline: none; transition: border-color .2s; appearance: none; width: 100%; }
+.fi:focus, .fse:focus, .fta:focus { border-color: var(--yellow); background: var(--white); }
+.fi::placeholder, .fta::placeholder { color: #aaa; }
+.fta { resize: vertical; min-height: 88px; margin-bottom: 12px; }
+.form-submit { width: 100%; background: var(--yellow); color: var(--dark); border: none; font-family: var(--font-display); font-size: 19px; padding: 15px; border-radius: var(--radius-pill); cursor: pointer; transition: background .2s, transform .15s; }
+.form-submit:hover { background: var(--yellow-dark); transform: translateY(-1px); }
+
+/* ─── CONTACT ─── */
+#contact { background: var(--off-white); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 52px; margin-top: 48px; align-items: start; }
+.contact-intro { font-size: 14px; color: var(--gray); font-weight: 500; line-height: 1.8; margin-bottom: 8px; }
+.contact-cards { display: flex; flex-direction: column; gap: 10px; margin-top: 24px; }
+.contact-card { display: flex; align-items: center; gap: 14px; background: var(--white); border: 2px solid var(--border); border-radius: var(--radius-lg); padding: 16px 18px; text-decoration: none; color: inherit; transition: border-color .2s, transform .2s; }
+.contact-card:hover { border-color: var(--yellow); transform: translateX(6px); }
+.cc-icon { font-size: 24px; flex-shrink: 0; }
+.cc-label { font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); margin-bottom: 3px; }
+.cc-val { font-size: 13px; color: var(--dark); font-weight: 700; line-height: 1.5; }
+.cc-arrow { margin-left: auto; color: var(--yellow-dark); font-size: 20px; font-weight: 900; flex-shrink: 0; }
+.map-box { background: var(--yellow); border-radius: var(--radius-lg); aspect-ratio: 4/3; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; position: relative; overflow: hidden; }
+.map-box-bg { position: absolute; bottom: 0; left: 0; right: 0; height: 45%; background: var(--dark); border-radius: 60% 60% 0 0 / 30% 30% 0 0; }
+.map-pin-big { font-size: 56px; position: relative; z-index: 2; }
+.map-address { font-size: 13px; color: var(--dark); text-align: center; line-height: 1.8; font-weight: 700; position: relative; z-index: 2; }
+.map-link { display: inline-flex; align-items: center; gap: 8px; background: var(--dark); color: var(--yellow); font-family: var(--font-body); font-size: 13px; font-weight: 900; padding: 11px 22px; border-radius: var(--radius-pill); text-decoration: none; position: relative; z-index: 2; transition: background .2s; }
+.map-link:hover { background: var(--red); color: var(--white); }
+
+/* ─── FOOTER ─── */
+footer { background: var(--dark); padding: 56px 64px 36px; }
+.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+.footer-brand { font-family: var(--font-display); font-size: 32px; color: var(--white); margin-bottom: 10px; }
+.footer-brand span { color: var(--yellow); }
+.footer-tagline { font-size: 12px; color: rgba(255,255,255,0.35); font-weight: 500; line-height: 1.7; }
+.footer-stars { color: var(--yellow); font-size: 17px; letter-spacing: 2px; margin-top: 12px; }
+.footer-stars small { font-size: 11px; color: rgba(255,255,255,0.3); font-family: var(--font-body); margin-left: 6px; letter-spacing: 0; }
+.footer-col-title { font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 16px; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-links a { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.45); text-decoration: none; transition: color .2s; }
+.footer-links a:hover { color: var(--yellow); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
+.footer-copy { font-size: 11px; color: rgba(255,255,255,0.2); font-weight: 600; }
+.footer-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+.footer-badge { font-size: 11px; font-weight: 700; background: rgba(255,199,44,0.08); border: 1px solid rgba(255,199,44,0.15); color: rgba(255,199,44,0.6); padding: 5px 12px; border-radius: var(--radius-pill); }
+
+/* ─── SCROLL REVEAL ─── */
+.sr { opacity: 0; transform: translateY(28px); transition: opacity .6s, transform .6s; }
+.sr.vis { opacity: 1; transform: translateY(0); }
+.sr-l { opacity: 0; transform: translateX(-28px); transition: opacity .6s, transform .6s; }
+.sr-l.vis { opacity: 1; transform: translateX(0); }
+
+/* ═══════════════════════════════════════════════════════
+   RESPONSIVE — ALL DEVICES COVERED
+   1400+ | 1024 | 768 | 600 | 480 | 400 | 320
+═══════════════════════════════════════════════════════ */
+
+/* Wide screens 1400px+ */
+@media (min-width: 1400px) {
+  .hero-main { padding: 80px 96px; }
+  section { padding: 100px 96px; }
+  .cta-banner { padding: 88px 96px; }
+  footer { padding: 64px 96px 40px; }
+  .menu-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+}
+
+/* Laptops / Large tablets 1024px */
+@media (max-width: 1024px) {
+  nav { padding: 0 32px; }
+  section { padding: 72px 40px; }
+  .hero-main { padding: 48px 40px; gap: 40px; }
+  .why-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .cta-banner { padding: 60px 40px; }
+  footer { padding: 48px 40px 28px; }
+  .hero-right { width: 260px; }
+}
+
+/* Tablets 768px */
+@media (max-width: 768px) {
+  nav { padding: 0 20px; height: 62px; }
+  .nav-links { display: none; }
+  .nav-logo-icon { width: 46px; height: 46px; }
+  .nav-logo-text { font-size: 19px; }
+  .nav-logo-text .brand-happy,
+  .nav-logo-text .brand-day { font-size: 14px; }
+  .nav-cta { padding: 8px 16px; font-size: 13px; gap: 6px; }
+
+  #hero { padding: 62px 0 0; }
+  .hero-main { flex-direction: column; padding: 32px 28px 44px; gap: 28px; align-items: flex-start; }
+  .hero-left { width: 100%; }
+  .hero-h1 { font-size: clamp(40px, 9vw, 64px); }
+  .hero-sub { font-size: 14px; max-width: 100%; }
+  .hero-stats { gap: 24px; margin-top: 28px; }
+  .hero-stat-num { font-size: 30px; }
+
+  /* Hero right: 2-col grid */
+  .hero-right { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .hero-open-pill { grid-column: 1 / -1; }
+  .hero-card { padding: 14px 16px; }
+  .hero-card-val { font-size: 24px; }
+  .hero-card-sub { font-size: 11px; }
+
+  section { padding: 56px 24px; }
+  .cta-banner { padding: 48px 24px; flex-direction: column; align-items: flex-start; gap: 20px; }
+  .btn-white { width: 100%; justify-content: center; }
+
+  .about-grid { grid-template-columns: 1fr; gap: 28px; }
+  .about-visual { aspect-ratio: 3/2; background-size: cover; }
+  .about-visual-arc { height: 30%; }
+
+  .res-grid { grid-template-columns: 1fr; gap: 28px; }
+  .contact-grid { grid-template-columns: 1fr; gap: 24px; }
+
+  .why-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .why-card { padding: 22px 18px; }
+  .why-card-num { font-size: 42px; }
+
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 24px; }
+  footer { padding: 40px 24px 24px; }
+  .footer-brand { font-size: 26px; }
+
+  .menu-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+  .res-form { padding: 24px 20px; }
+}
+
+/* Large phones 600px */
+@media (max-width: 600px) {
+  .hero-main { padding: 24px 16px 36px; gap: 24px; }
+  .hero-left { text-align: center; }
+  .hero-badge { margin: 0 auto 16px; }
+  .hero-h1 { font-size: clamp(36px, 10vw, 52px); }
+  .hero-sub { font-size: 13px; margin: 0 auto 24px; }
+  .hero-btns { justify-content: center; gap: 10px; }
+  .hero-btns .btn-yellow,
+  .hero-btns .btn-outline { flex: 1; min-width: 130px; justify-content: center; padding: 13px 16px; font-size: 14px; }
+  .hero-stats { justify-content: center; gap: 18px; }
+  .hero-stat-num { font-size: 26px; }
+  .hero-stat-label { font-size: 10px; }
+
+  section { padding: 48px 16px; }
+  .cta-banner { padding: 40px 16px; }
+  .cta-banner-title { font-size: 36px; }
+
+  .about-visual { aspect-ratio: 1/1; }
+  .about-body { font-size: 14px; }
+
+  .menu-cats { gap: 6px; }
+  .menu-cat { padding: 7px 14px; font-size: 12px; }
+  .menu-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
+  .menu-img { height: 130px; }
+  .menu-name { font-size: 16px; }
+  .menu-desc { font-size: 11px; margin-bottom: 10px; }
+  .menu-price { font-size: 18px; }
+  .menu-info { padding: 12px 14px 14px; }
+
+  .why-grid { grid-template-columns: 1fr; gap: 10px; }
+  .why-card { padding: 20px 18px; }
+
+  .form-row2 { grid-template-columns: 1fr; gap: 10px; }
+  .res-form { padding: 20px 16px; }
+
+  .footer-top { grid-template-columns: 1fr; gap: 20px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .footer-badges { gap: 6px; }
+}
+
+/* Phones 480px */
+@media (max-width: 480px) {
+  /* Hero right: 2-col still works, keep it */
+  .hero-card-val { font-size: 22px; }
+  .review-card { width: 260px; padding: 20px; }
+  .map-box { aspect-ratio: 3/2; }
+  .about-facts { gap: 10px; }
+  .fact-num { font-size: 24px; }
+}
+
+/* Small phones 400px */
+@media (max-width: 400px) {
+  nav { height: 56px; padding: 0 12px; }
+  .nav-logo-icon { width: 38px; height: 38px; }
+  .nav-logo-text { font-size: 16px; }
+  .nav-logo-text .brand-happy,
+  .nav-logo-text .brand-day { font-size: 12px; }
+  .nav-cta { padding: 7px 12px; font-size: 12px; gap: 4px; }
+
+  .hero-h1 { font-size: clamp(30px, 9.5vw, 40px); }
+  .hero-sub { font-size: 12px; }
+  .hero-btns { flex-direction: column; align-items: stretch; }
+  .hero-btns .btn-yellow,
+  .hero-btns .btn-outline { width: 100%; min-width: unset; }
+
+  /* Hero right single column on very small screens */
+  .hero-right { grid-template-columns: 1fr; }
+  .hero-open-pill { grid-column: 1; }
+
+  .menu-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .menu-img { height: 110px; }
+  .menu-name { font-size: 14px; }
+  .menu-add-btn { width: 28px; height: 28px; font-size: 16px; }
+
+  .why-card-num { display: none; }
+  section { padding: 40px 14px; }
+  .cta-banner { padding: 36px 14px; }
+}
+
+/* Very small phones 320px */
+@media (max-width: 320px) {
+  .hero-h1 { font-size: 28px; }
+  .hero-sub { font-size: 11px; }
+  /* Hide last part of logo text to save space */
+  .nav-logo-text .brand-day { display: none; }
+  .menu-grid { grid-template-columns: 1fr; }
+  .about-facts { grid-template-columns: 1fr; }
+  .chips .chip { font-size: 11px; padding: 5px 10px; }
+  .hero-stats { flex-direction: column; align-items: center; gap: 10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon"><img src="logo.png" alt="JeoHappyDay"></div>
+    <span class="nav-logo-text">
+      <span class="brand-jeo">Jeo</span>
+      <span class="brand-happy">happy</span>
+      <span class="brand-day">Day</span>
+    </span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact">Location</a></li>
+  </ul>
+  <a href="tel:08263026822" class="nav-cta">
+    <span class="nav-dot"></span>
+    Call Now
+  </a>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-yellow-blob"></div>
+  <div class="hero-red-blob"></div>
+  <div class="hero-main">
+    <div class="hero-left">
+      <div class="hero-badge">⭐ 4.8 Rated · Virar's Favourite</div>
+      <h1 class="hero-h1">
+        Cake &amp;<br>
+        <span class="yellow">Coffee</span><br>
+        <span class="red">Cafe</span>
+      </h1>
+      <p class="hero-sub">
+        Virar West's most-loved bakery. <strong>Freshly baked daily.</strong> Premium cakes, artisan coffee &amp; sweet celebrations — starting at just ₹200.
+      </p>
+      <div class="hero-btns">
+        <a href="#menu" class="btn-yellow">Explore Menu ↓</a>
+        <a href="#reservation" class="btn-outline">Reserve a Table</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">4.8<span class="accent">★</span></div>
+          <div class="hero-stat-label">Google Rating</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">519<span class="accent">+</span></div>
+          <div class="hero-stat-label">Happy Reviews</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num"><span class="accent">₹</span>200</div>
+          <div class="hero-stat-label">Starting Price</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-card">
+        <div class="hero-card-label">Today's Rating</div>
+        <div class="hero-card-val">4.8 ★</div>
+        <div class="hero-card-sub">519 verified reviews</div>
+      </div>
+      <div class="hero-open-pill">
+        <span class="nav-dot"></span>
+        Open · Closes 12:30 AM
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-label">Price Range</div>
+        <div class="hero-card-val">₹200–400</div>
+        <div class="hero-card-sub">Per person · Great value</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TICKER ══ -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-inner">
+    <span class="ticker-item">Black Forest Cake</span><span class="ticker-item ticker-sep">✦</span>
+    <span class="ticker-item">Cold Coffee</span><span class="ticker-item ticker-sep">✦</span>
+    <span class="ticker-item">Custom Cakes</span><span class="ticker-item ticker-sep">✦</span>
+    <span class="ticker-item">Open Till 12:30 AM</span><span class="ticker-item ticker-sep">✦</span>
+    <span class="ticker-item">Virar West</span><span class="ticker-item ticker-sep">✦</span>
+    <span class="ticker-item">4.8 Stars on Google</span><span class="ticker-item ticker-sep">✦</span>
+    <span class="ticker-item">Delivery Available</span><span class="ticker-item ticker-sep">✦</span>
+    <span class="ticker-item">Black Forest Cake</span><span class="ticker-item ticker-sep">✦</span>
+    <span class="ticker-item">Cold Coffee</span><span class="ticker-item ticker-sep">✦</span>
+    <span class="ticker-item">Custom Cakes</span><span class="ticker-item ticker-sep">✦</span>
+    <span class="ticker-item">Open Till 12:30 AM</span><span class="ticker-item ticker-sep">✦</span>
+    <span class="ticker-item">Virar West</span><span class="ticker-item ticker-sep">✦</span>
+    <span class="ticker-item">4.8 Stars on Google</span><span class="ticker-item ticker-sep">✦</span>
+    <span class="ticker-item">Delivery Available</span><span class="ticker-item ticker-sep">✦</span>
+  </div>
+</div>
+
+<!-- ══ ABOUT ══ -->
+<section id="about">
+  <div class="sec-tag sr">🎂 Our Story</div>
+  <h2 class="sec-title sr">Born from a love<br>of <span class="yellow">celebration.</span></h2>
+  <div class="about-grid">
+    <div class="about-visual sr-l">
+      <div class="about-visual-arc"></div>
+      <div class="about-visual-icon">🎂</div>
+      <div class="about-rating-badge"><small>Rated</small>4.8 ★</div>
+    </div>
+    <div>
+      <p class="about-body sr">Born from a <strong>love for celebration</strong> and the art of baking — Jeohappyday began as a dream to make every day feel special in Virar. Nestled in Sneha Nagar CHS, our cozy cake shop has become <strong>Virar's go-to destination</strong> for freshly baked cakes, artisan pastries, and quality coffee.</p>
+      <p class="about-body sr">We believe every occasion — big or small — deserves something extraordinary. <strong>Proudly women-owned</strong> and LGBTQ+ friendly, where everyone is welcome.</p>
+      <div class="about-facts sr">
+        <div class="fact-card"><div class="fact-emoji">🎂</div><div class="fact-num">519+</div><div class="fact-label">Happy Reviews</div></div>
+        <div class="fact-card"><div class="fact-emoji">⭐</div><div class="fact-num">4.8</div><div class="fact-label">Google Rating</div></div>
+        <div class="fact-card"><div class="fact-emoji">☕</div><div class="fact-num">₹200</div><div class="fact-label">Starting Price</div></div>
+        <div class="fact-card"><div class="fact-emoji">🌙</div><div class="fact-num">12:30</div><div class="fact-label">Open Till AM</div></div>
+      </div>
+      <div class="chips sr">
+        <div class="chip">🚗 Takeaway</div>
+        <div class="chip">📦 Delivery</div>
+        <div class="chip">🏪 In-Store</div>
+        <div class="chip">🏳️‍🌈 LGBTQ+ Friendly</div>
+        <div class="chip">👩 Women-Owned</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MENU ══ -->
+<section id="menu">
+  <div class="menu-header">
+    <div>
+      <div class="sec-tag sr">🍽️ Our Menu</div>
+      <h2 class="sec-title sr">Crafted daily,<br><span class="red">baked with love.</span></h2>
+    </div>
+    <p class="menu-note sr">Fresh every morning.<br>Finest ingredients only.</p>
+  </div>
+  <div class="menu-cats sr">
+    <button class="menu-cat active" onclick="filterMenu('all',this)">All Items</button>
+    <button class="menu-cat" onclick="filterMenu('cake',this)">🎂 Cakes</button>
+    <button class="menu-cat" onclick="filterMenu('pastry',this)">🥐 Pastries</button>
+    <button class="menu-cat" onclick="filterMenu('coffee',this)">☕ Coffee</button>
+    <button class="menu-cat" onclick="filterMenu('sundae',this)">🍨 Sundaes</button>
+    <button class="menu-cat" onclick="filterMenu('dessert',this)">🍮 Desserts</button>
+  </div>
+  <div class="menu-grid" id="menu-grid">
+    <div class="menu-card" data-cat="cake"><div class="menu-img" style="background:#fde8e8;"><img src="blackforest.jpg" alt="Black Forest Cake"><div class="menu-badge">⭐ Popular</div></div><div class="menu-info"><div class="menu-name">Black Forest Cake</div><div class="menu-desc">Classic German recipe with dark chocolate sponge, fresh cream & hand-picked cherries</div><div class="menu-footer"><div class="menu-price"><span>₹</span>350+</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="cake"><div class="menu-img" style="background:#e8f5e0;"><img src="gemancake.jpg" alt="German Forest Cake"><div class="menu-badge" style="background:#166534;">👨‍🍳 Chef's Pick</div></div><div class="menu-info"><div class="menu-name">German Forest Cake</div><div class="menu-desc">Rich dark chocolate with mocha cream, roasted hazelnuts & chocolate shavings</div><div class="menu-footer"><div class="menu-price"><span>₹</span>380+</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="cake"><div class="menu-img" style="background:#f9ede7;"><img src="chocochips.jpg" alt="ChocoChips Cake"><div class="menu-badge">🍫 Bestseller</div></div><div class="menu-info"><div class="menu-name">ChocoChips Cake</div><div class="menu-desc">Soft chocolate sponge loaded with choco chips and a smooth, glossy finish</div><div class="menu-footer"><div class="menu-price"><span>₹</span>340+</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="cake"><div class="menu-img" style="background:#f4efe8;"><img src="zebratochue.jpg" alt="Zebra Torte Cake"><div class="menu-badge">🦓 Signature</div></div><div class="menu-info"><div class="menu-name">Zebra Torte Cake</div><div class="menu-desc">Layered chocolate and vanilla with a clean zebra finish and light cream</div><div class="menu-footer"><div class="menu-price"><span>₹</span>420+</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="cake"><div class="menu-img" style="background:#fff6ea;"><img src="customizeddrinks.jpg" alt="Customized Drink Bottle Cake"><div class="menu-badge yellow-badge">🎨 Custom</div></div><div class="menu-info"><div class="menu-name">Costumized Drink Bottle Cake</div><div class="menu-desc">Bottle-style theme cake tailored to your brand, party, or surprise plan</div><div class="menu-footer"><div class="menu-price"><span>₹</span>750+</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="dessert"><div class="menu-img" style="background:#f6f1e6;"><img src="rasmalaicake.jpg" alt="Happy Pistachio Rasmalai"><div class="menu-badge">🥛 Fresh</div></div><div class="menu-info"><div class="menu-name">Happy Pistachio Rasmalai</div><div class="menu-desc">Creamy rasmalai with pistachio crunch, light saffron notes, and soft bite</div><div class="menu-footer"><div class="menu-price"><span>₹</span>180+</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="pastry"><div class="menu-img" style="background:#f7efe5;"><img src="paneerroll.jpg" alt="Paneer Roll"><div class="menu-badge">🌶️ Spicy</div></div><div class="menu-info"><div class="menu-name">Paneer Roll</div><div class="menu-desc">Grilled paneer with tangy masala, wrapped warm for a quick savory bite</div><div class="menu-footer"><div class="menu-price"><span>₹</span>90+</div><button class="menu-add-btn">+</button></div></div></div>
+    <!-- Hot Coffees -->
+    <div class="menu-card" data-cat="coffee"><div class="menu-img" style="background:#f3e7d8;"><div style="font-size:52px;">☕</div><div class="menu-badge">☕ Hot</div></div><div class="menu-info"><div class="menu-name">Regular Coffee</div><div class="menu-desc">Simple, strong, and freshly brewed</div><div class="menu-footer"><div class="menu-price"><span>₹</span>25</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="coffee"><div class="menu-img" style="background:#efe0cf;"><div style="font-size:52px;">⚡</div><div class="menu-badge">☕ Hot</div></div><div class="menu-info"><div class="menu-name">Expresso</div><div class="menu-desc">Short, bold shot with rich aroma</div><div class="menu-footer"><div class="menu-price"><span>₹</span>30</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="coffee"><div class="menu-img" style="background:#f2e4d2;"><div style="font-size:52px;">🥛</div><div class="menu-badge">☕ Hot</div></div><div class="menu-info"><div class="menu-name">Cappuccino</div><div class="menu-desc">Creamy foam with classic coffee bite</div><div class="menu-footer"><div class="menu-price"><span>₹</span>30</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="coffee"><div class="menu-img" style="background:#efe6db;"><div style="font-size:52px;">🌰</div><div class="menu-badge">☕ Hot</div></div><div class="menu-info"><div class="menu-name">Hazelnut</div><div class="menu-desc">Nutty aroma with warm roasted notes</div><div class="menu-footer"><div class="menu-price"><span>₹</span>30</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="coffee"><div class="menu-img" style="background:#f6eee2;"><div style="font-size:52px;">🍦</div><div class="menu-badge">☕ Hot</div></div><div class="menu-info"><div class="menu-name">Vanilla</div><div class="menu-desc">Smooth vanilla touch on classic coffee</div><div class="menu-footer"><div class="menu-price"><span>₹</span>30</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="coffee"><div class="menu-img" style="background:#f0e5d8;"><div style="font-size:52px;">🍫</div><div class="menu-badge">☕ Hot</div></div><div class="menu-info"><div class="menu-name">Chocolate</div><div class="menu-desc">Cocoa-rich coffee for a sweet kick</div><div class="menu-footer"><div class="menu-price"><span>₹</span>30</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="coffee"><div class="menu-img" style="background:#efe0d0;"><div style="font-size:52px;">🌟</div><div class="menu-badge">☕ Hot</div></div><div class="menu-info"><div class="menu-name">Mocha</div><div class="menu-desc">Coffee and chocolate blended smooth</div><div class="menu-footer"><div class="menu-price"><span>₹</span>30</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="coffee"><div class="menu-img" style="background:#eadccf;"><div style="font-size:52px;">🖤</div><div class="menu-badge">☕ Hot</div></div><div class="menu-info"><div class="menu-name">Black Coffee</div><div class="menu-desc">Bold, no milk, full coffee taste</div><div class="menu-footer"><div class="menu-price"><span>₹</span>30</div><button class="menu-add-btn">+</button></div></div></div>
+    <!-- Teas -->
+    <div class="menu-card" data-cat="coffee"><div class="menu-img" style="background:#f1efe6;"><div style="font-size:52px;">🍵</div><div class="menu-badge">🍵 Tea</div></div><div class="menu-info"><div class="menu-name">Plain Tea</div><div class="menu-desc">Classic cutting chai, light and easy</div><div class="menu-footer"><div class="menu-price"><span>₹</span>10</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="coffee"><div class="menu-img" style="background:#f3eee4;"><div style="font-size:52px;">🫚</div><div class="menu-badge">🍵 Tea</div></div><div class="menu-info"><div class="menu-name">Ginger Tea</div><div class="menu-desc">Adrak flavor with strong desi kick</div><div class="menu-footer"><div class="menu-price"><span>₹</span>20</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="coffee"><div class="menu-img" style="background:#f2eadc;"><div style="font-size:52px;">🧡</div><div class="menu-badge">🍵 Tea</div></div><div class="menu-info"><div class="menu-name">Jaggery Tea</div><div class="menu-desc">Gud sweetness with warm chai notes</div><div class="menu-footer"><div class="menu-price"><span>₹</span>20</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="coffee"><div class="menu-img" style="background:#f6efe2;"><div style="font-size:52px;">🥭</div><div class="menu-badge">🍵 Tea</div></div><div class="menu-info"><div class="menu-name">Mango Tea</div><div class="menu-desc">Fruity mango flavor with chai base</div><div class="menu-footer"><div class="menu-price"><span>₹</span>30</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="coffee"><div class="menu-img" style="background:#f7e7ea;"><div style="font-size:52px;">🍓</div><div class="menu-badge">🍵 Tea</div></div><div class="menu-info"><div class="menu-name">Strawberry Tea</div><div class="menu-desc">Sweet strawberry aroma in every sip</div><div class="menu-footer"><div class="menu-price"><span>₹</span>30</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="coffee"><div class="menu-img" style="background:#efe3da;"><div style="font-size:52px;">🍫</div><div class="menu-badge">🍵 Tea</div></div><div class="menu-info"><div class="menu-name">Chocolate Tea</div><div class="menu-desc">Cocoa touch with light tea body</div><div class="menu-footer"><div class="menu-price"><span>₹</span>30</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="coffee"><div class="menu-img" style="background:#f4efe3;"><div style="font-size:52px;">🍋</div><div class="menu-badge">🍵 Tea</div></div><div class="menu-info"><div class="menu-name">Lemon Black Tea</div><div class="menu-desc">Fresh lemon with strong black tea</div><div class="menu-footer"><div class="menu-price"><span>₹</span>30</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="coffee"><div class="menu-img" style="background:#e7f0e0;"><div style="font-size:52px;">🌿</div><div class="menu-badge">🍵 Tea</div></div><div class="menu-info"><div class="menu-name">Green Tea</div><div class="menu-desc">Light, clean, and soothing cup</div><div class="menu-footer"><div class="menu-price"><span>₹</span>30</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="coffee"><div class="menu-img" style="background:#eef5e3;"><div style="font-size:52px;">🌾</div><div class="menu-badge">🍵 Tea</div></div><div class="menu-info"><div class="menu-name">Lemon Grass Tea</div><div class="menu-desc">Citrus aroma with lemongrass notes</div><div class="menu-footer"><div class="menu-price"><span>₹</span>30</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="coffee"><div class="menu-img" style="background:#f3efe5;"><div style="font-size:52px;">✨</div><div class="menu-badge">🍵 Tea</div></div><div class="menu-info"><div class="menu-name">Elaichi Chai</div><div class="menu-desc">Elaichi aroma, soft and sweet</div><div class="menu-footer"><div class="menu-price"><span>₹</span>20</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="coffee"><div class="menu-img" style="background:#efe6d7;"><div style="font-size:52px;">🌿</div><div class="menu-badge">🍵 Tea</div></div><div class="menu-info"><div class="menu-name">Paan Chai</div><div class="menu-desc">Desi paan taste with chai warmth</div><div class="menu-footer"><div class="menu-price"><span>₹</span>20</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="coffee"><div class="menu-img" style="background:#f7e7ec;"><div style="font-size:52px;">🌹</div><div class="menu-badge">🍵 Tea</div></div><div class="menu-info"><div class="menu-name">Rose Chai</div><div class="menu-desc">Mild rose aroma in a creamy chai</div><div class="menu-footer"><div class="menu-price"><span>₹</span>20</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="coffee"><div class="menu-img" style="background:#f6e6dd;"><div style="font-size:52px;">💛</div><div class="menu-badge">🍵 Tea</div></div><div class="menu-info"><div class="menu-name">Gulkand Chai</div><div class="menu-desc">Gulkand sweetness with chai base</div><div class="menu-footer"><div class="menu-price"><span>₹</span>20</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="coffee"><div class="menu-img" style="background:#f7efe2;"><div style="font-size:52px;">💫</div><div class="menu-badge">🍵 Tea</div></div><div class="menu-info"><div class="menu-name">Kesari Chai</div><div class="menu-desc">Saffron touch with warm chai</div><div class="menu-footer"><div class="menu-price"><span>₹</span>20</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="coffee"><div class="menu-img" style="background:#e9f4e5;"><div style="font-size:52px;">🍃</div><div class="menu-badge">🍵 Tea</div></div><div class="menu-info"><div class="menu-name">Tulsi Chai</div><div class="menu-desc">Tulsi aroma, soothing and light</div><div class="menu-footer"><div class="menu-price"><span>₹</span>20</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="coffee"><div class="menu-img" style="background:#f0e5d6;"><div style="font-size:52px;">🌶️</div><div class="menu-badge">🍵 Tea</div></div><div class="menu-info"><div class="menu-name">Massala Chai</div><div class="menu-desc">Spiced chai with strong desi flavor</div><div class="menu-footer"><div class="menu-price"><span>₹</span>20</div><button class="menu-add-btn">+</button></div></div></div>
+    <!-- Milkshakes -->
+    <div class="menu-card" data-cat="dessert"><div class="menu-img" style="background:#f9e6ee;"><div style="font-size:52px;">🥤</div><div class="menu-badge">🥤 Shake</div></div><div class="menu-info"><div class="menu-name">Rose Milkshake</div><div class="menu-desc">Rose flavor with creamy milk base</div><div class="menu-footer"><div class="menu-price"><span>₹</span>70</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="dessert"><div class="menu-img" style="background:#f9e6ea;"><div style="font-size:52px;">🍓</div><div class="menu-badge">🥤 Shake</div></div><div class="menu-info"><div class="menu-name">Strawberry Milkshake</div><div class="menu-desc">Fresh strawberry vibe, thick and cool</div><div class="menu-footer"><div class="menu-price"><span>₹</span>70</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="dessert"><div class="menu-img" style="background:#efe1d6;"><div style="font-size:52px;">🍫</div><div class="menu-badge">🥤 Shake</div></div><div class="menu-info"><div class="menu-name">Chocolate Milk Shake</div><div class="menu-desc">Chocolate-loaded, rich and smooth</div><div class="menu-footer"><div class="menu-price"><span>₹</span>70</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="dessert"><div class="menu-img" style="background:#f7efe1;"><div style="font-size:52px;">🥭</div><div class="menu-badge">🥤 Shake</div></div><div class="menu-info"><div class="menu-name">Mango Milkshake</div><div class="menu-desc">Mango flavor, thick and refreshing</div><div class="menu-footer"><div class="menu-price"><span>₹</span>70</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="dessert"><div class="menu-img" style="background:#f4ead6;"><div style="font-size:52px;">🍯</div><div class="menu-badge">🥤 Shake</div></div><div class="menu-info"><div class="menu-name">Butterscotch Milkshake</div><div class="menu-desc">Sweet butterscotch with creamy finish</div><div class="menu-footer"><div class="menu-price"><span>₹</span>70</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="dessert"><div class="menu-img" style="background:#f6efe3;"><div style="font-size:52px;">🍦</div><div class="menu-badge">🥤 Shake</div></div><div class="menu-info"><div class="menu-name">Vanilla Milkshake</div><div class="menu-desc">Smooth vanilla, light and creamy</div><div class="menu-footer"><div class="menu-price"><span>₹</span>70</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="dessert"><div class="menu-img" style="background:#e7e2d9;"><div style="font-size:52px;">🍪</div><div class="menu-badge">🥤 Shake</div></div><div class="menu-info"><div class="menu-name">Oreo Milkshake</div><div class="menu-desc">Oreo crunch with chilled milk blend</div><div class="menu-footer"><div class="menu-price"><span>₹</span>80</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="dessert"><div class="menu-img" style="background:#f2efe2;"><div style="font-size:52px;">🌼</div><div class="menu-badge">🥤 Shake</div></div><div class="menu-info"><div class="menu-name">Turmeric Latte</div><div class="menu-desc">Haldi latte, warm and soothing</div><div class="menu-footer"><div class="menu-price"><span>₹</span>80</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="dessert"><div class="menu-img" style="background:#f5eee2;"><div style="font-size:52px;">🥛</div><div class="menu-badge">🥤 Shake</div></div><div class="menu-info"><div class="menu-name">Saffron Almond Milk</div><div class="menu-desc">Kesar badam milk, rich and smooth</div><div class="menu-footer"><div class="menu-price"><span>₹</span>80</div><button class="menu-add-btn">+</button></div></div></div>
+    <!-- Cold Coffee -->
+    <div class="menu-card" data-cat="coffee"><div class="menu-img" style="background:#f4e6d8;"><div style="font-size:52px;">🧊</div><div class="menu-badge">❄️ Cold</div></div><div class="menu-info"><div class="menu-name">Vanilla Cold Coffee</div><div class="menu-desc">Chilled vanilla coffee, smooth finish</div><div class="menu-footer"><div class="menu-price"><span>₹</span>50</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="coffee"><div class="menu-img" style="background:#f1e3d2;"><div style="font-size:52px;">🧊</div><div class="menu-badge">❄️ Cold</div></div><div class="menu-info"><div class="menu-name">Hazelnut Cold Coffee</div><div class="menu-desc">Nutty cold coffee, light and creamy</div><div class="menu-footer"><div class="menu-price"><span>₹</span>50</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="coffee"><div class="menu-img" style="background:#f0e1d2;"><div style="font-size:52px;">🧊</div><div class="menu-badge">❄️ Cold</div></div><div class="menu-info"><div class="menu-name">Caramel Cold Coffee</div><div class="menu-desc">Caramel swirl with chilled coffee</div><div class="menu-footer"><div class="menu-price"><span>₹</span>50</div><button class="menu-add-btn">+</button></div></div></div>
+    <!-- Iced Tea -->
+    <div class="menu-card" data-cat="coffee"><div class="menu-img" style="background:#eef5e0;"><div style="font-size:52px;">🍋</div><div class="menu-badge">🧊 Iced</div></div><div class="menu-info"><div class="menu-name">Lemon Iced Tea</div><div class="menu-desc">Fresh lemon twist, served chilled</div><div class="menu-footer"><div class="menu-price"><span>₹</span>50</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="coffee"><div class="menu-img" style="background:#e6f1e6;"><div style="font-size:52px;">🌿</div><div class="menu-badge">🧊 Iced</div></div><div class="menu-info"><div class="menu-name">Mint Iced Tea</div><div class="menu-desc">Cool mint and light tea blend</div><div class="menu-footer"><div class="menu-price"><span>₹</span>50</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="coffee"><div class="menu-img" style="background:#eef2e1;"><div style="font-size:52px;">🍋</div><div class="menu-badge">🧊 Iced</div></div><div class="menu-info"><div class="menu-name">Lemon &amp; Ginger Iced Tea</div><div class="menu-desc">Zesty lemon with ginger kick</div><div class="menu-footer"><div class="menu-price"><span>₹</span>50</div><button class="menu-add-btn">+</button></div></div></div>
+    <div class="menu-card" data-cat="coffee"><div class="menu-img" style="background:#f7e7eb;"><div style="font-size:52px;">🍓</div><div class="menu-badge">🧊 Iced</div></div><div class="menu-info"><div class="menu-name">Strawberry Iced Tea</div><div class="menu-desc">Fruity strawberry with chilled tea</div><div class="menu-footer"><div class="menu-price"><span>₹</span>50</div><button class="menu-add-btn">+</button></div></div></div>
+    <!-- Sundae -->
+    <div class="menu-card" data-cat="sundae"><div class="menu-img" style="background:#fff1ec;"><div style="font-size:52px;">🍨</div><div class="menu-badge">⭐ Special</div></div><div class="menu-info"><div class="menu-name">Happy Hot Fudge Sundae</div><div class="menu-desc">Hot fudge with ice cream and crunch</div><div class="menu-footer"><div class="menu-price"><span>₹</span>150</div><button class="menu-add-btn">+</button></div></div></div>
+  </div>
+</section>
+
+<!-- ══ CTA BANNER ══ -->
+<div class="cta-banner">
+  <div class="cta-banner-left">
+    <div class="cta-banner-tag">Late Night Hours</div>
+    <div class="cta-banner-title">Late Night<br><span class="y">Cravings?</span></div>
+    <div class="cta-banner-sub">We're open till 12:30 AM, every single day.</div>
+  </div>
+  <a href="tel:08263026822" class="btn-white">📞 Call Now — 082630 26822</a>
+</div>
+
+<!-- ══ WHY ══ -->
+<section id="why">
+  <div class="sec-tag sr">🏆 Why Jeohappyday</div>
+  <h2 class="sec-title sr">Virar's most<br><span class="yellow">loved bakery.</span></h2>
+  <div class="why-grid">
+    <div class="why-card sr"><div class="why-card-num">01</div><div class="why-emoji">🎂</div><div class="why-title">Freshly Baked Daily</div><div class="why-text">Every cake and pastry baked fresh every morning. No day-old items — ever.</div></div>
+    <div class="why-card sr"><div class="why-card-num">02</div><div class="why-emoji">⭐</div><div class="why-title">4.8 Star Rated</div><div class="why-text">519 real Google reviews. Voted Virar's most loved cake shop for quality and taste.</div></div>
+    <div class="why-card sr"><div class="why-card-num">03</div><div class="why-emoji">🌙</div><div class="why-title">Open Late Nights</div><div class="why-text">Late night cravings? We're open till 12:30 AM — because celebrations don't follow a schedule.</div></div>
+    <div class="why-card sr"><div class="why-card-num">04</div><div class="why-emoji">💰</div><div class="why-title">Affordable Luxury</div><div class="why-text">Premium cakes starting at ₹200. Quality you'd pay double for, at prices that feel like a celebration.</div></div>
+    <div class="why-card sr"><div class="why-card-num">05</div><div class="why-emoji">📦</div><div class="why-title">Takeaway & Delivery</div><div class="why-text">In-store, takeaway, no-contact delivery. Your favourite treats, your way.</div></div>
+    <div class="why-card sr"><div class="why-card-num">06</div><div class="why-emoji">👩</div><div class="why-title">Women-Owned Pride</div><div class="why-text">A women-owned business crafting joy in Virar. LGBTQ+ friendly — everyone is welcome.</div></div>
+    <div class="why-card sr"><div class="why-card-num">07</div><div class="why-emoji">☕</div><div class="why-title">Artisan Coffee</div><div class="why-text">From cold brews to creamy cappuccinos — crafted to complement every sweet bite.</div></div>
+    <div class="why-card sr"><div class="why-card-num">08</div><div class="why-emoji">🎊</div><div class="why-title">Custom Celebrations</div><div class="why-text">Birthday, anniversary, or just Tuesday — we make every occasion extraordinary.</div></div>
+  </div>
+</section>
+
+<!-- ══ REVIEWS ══ -->
+<section id="reviews">
+  <div class="sec-tag sr">💬 Real Reviews</div>
+  <h2 class="sec-title sr">What our guests<br><span class="red">are saying.</span></h2>
+  <p class="reviews-meta sr">4.8 ★ on Google · 519 Verified Reviews</p>
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">"Nice ambience, good taste of pastries & nice staff.. love the experience! 🍻🥂"</p><div class="review-author"><div class="review-avatar">A</div><div><div class="review-name">Anil K.</div><div class="review-role">Google Review · Local Guide</div></div></div></div>
+      <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">"Nice and tasty cakes with good quality and affordable price. My go-to place for every birthday!"</p><div class="review-author"><div class="review-avatar" style="background:#DA291C;color:white;">P</div><div><div class="review-name">Priya S.</div><div class="review-role">Google Review · Virar</div></div></div></div>
+      <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">"The cakes are soft and delicious 😋 very fresh and staff has good behaviour! Highly recommend."</p><div class="review-author"><div class="review-avatar" style="background:#166534;color:white;">PB</div><div><div class="review-name">Prince Barot</div><div class="review-role">2 reviews · 2 photos</div></div></div></div>
+      <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">"Nice clean place, great service! The cold coffee here is absolutely amazing — perfect with the Black Forest cake."</p><div class="review-author"><div class="review-avatar">R</div><div><div class="review-name">Rahul M.</div><div class="review-role">Google Review · Local Guide</div></div></div></div>
+      <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">"Came here for my daughter's birthday cake — they absolutely nailed it. Stunning presentation and tasted even better!"</p><div class="review-author"><div class="review-avatar" style="background:#DA291C;color:white;">S</div><div><div class="review-name">Sunita D.</div><div class="review-role">Google Review · Virar West</div></div></div></div>
+      <div class="review-card"><div class="review-stars">★★★★☆</div><p class="review-text">"Good variety of cakes and the sundaes are fantastic! Staff is very polite and helpful. Will come back for sure."</p><div class="review-author"><div class="review-avatar" style="background:#7c4a1e;color:white;">H</div><div><div class="review-name">Himanshu S.</div><div class="review-role">Local Guide · 107 reviews</div></div></div></div>
+      <!-- Duplicates for loop -->
+      <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">"Nice ambience, good taste of pastries & nice staff.. love the experience! 🍻🥂"</p><div class="review-author"><div class="review-avatar">A</div><div><div class="review-name">Anil K.</div><div class="review-role">Google Review · Local Guide</div></div></div></div>
+      <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">"Nice and tasty cakes with good quality and affordable price. My go-to place for every birthday!"</p><div class="review-author"><div class="review-avatar" style="background:#DA291C;color:white;">P</div><div><div class="review-name">Priya S.</div><div class="review-role">Google Review · Virar</div></div></div></div>
+      <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">"Came here for my daughter's birthday cake — they absolutely nailed it. Stunning presentation and tasted even better!"</p><div class="review-author"><div class="review-avatar" style="background:#DA291C;color:white;">S</div><div><div class="review-name">Sunita D.</div><div class="review-role">Google Review · Virar West</div></div></div></div>
+      <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">"The cakes are soft and delicious 😋 very fresh and staff has good behaviour! Highly recommend."</p><div class="review-author"><div class="review-avatar" style="background:#166534;color:white;">PB</div><div><div class="review-name">Prince Barot</div><div class="review-role">2 reviews · 2 photos</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ RESERVATION ══ -->
+<section id="reservation">
+  <div class="sec-tag">🗓️ Reserve a Table</div>
+  <h2 class="sec-title sr">Plan your visit,<br><span class="yellow">make it special.</span></h2>
+  <div class="res-grid">
+    <div>
+      <p class="res-desc sr">Walk in anytime, or call us to pre-book your table for special occasions. We'd love to make your moment unforgettable.</p>
+      <div class="res-info-list">
+        <div class="res-row sr"><span class="res-icon">📍</span><div><div class="res-row-label">Address</div><div class="res-row-val">Shop No. 9, Sneha Nagar CHS, Bhaji Gali, near Vidhya Vihar School, Virar West, Palghar 401303</div></div></div>
+        <div class="res-row sr"><span class="res-icon">🕐</span><div><div class="res-row-label">Hours</div><div class="res-row-val">Open Daily · 8:00 AM – 12:30 AM</div></div></div>
+        <div class="res-row sr"><span class="res-icon">📞</span><div><div class="res-row-label">Phone</div><div class="res-row-val">082630 26822</div></div></div>
+        <div class="res-row sr"><span class="res-icon">💰</span><div><div class="res-row-label">Price Range</div><div class="res-row-val">₹200 – ₹400 per person</div></div></div>
+      </div>
+    </div>
+    <div class="sr">
+      <form class="res-form" onsubmit="handleForm(event)">
+        <div class="form-row2">
+          <div class="fg"><label class="fl">Your Name</label><input type="text" class="fi" placeholder="Full name" required></div>
+          <div class="fg"><label class="fl">Phone</label><input type="tel" class="fi" placeholder="Mobile number" required></div>
+        </div>
+        <div class="form-row2">
+          <div class="fg"><label class="fl">Date</label><input type="date" class="fi" required></div>
+          <div class="fg"><label class="fl">Time</label><input type="time" class="fi" required></div>
+        </div>
+        <div class="form-row2">
+          <div class="fg"><label class="fl">Guests</label><select class="fse fi"><option>1 Person</option><option selected>2 People</option><option>3–4 People</option><option>5–6 People</option><option>7+ People</option></select></div>
+          <div class="fg"><label class="fl">Occasion</label><select class="fse fi"><option>Regular Visit</option><option>Birthday 🎂</option><option>Anniversary</option><option>Date Night</option><option>Family Gathering</option><option>Other</option></select></div>
+        </div>
+        <div class="fg" style="margin-bottom:12px;"><label class="fl">Special Requests</label><textarea class="fta" placeholder="Any dietary requirements, cake preferences, or special arrangements..."></textarea></div>
+        <button type="submit" class="form-submit">Confirm Reservation →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact">
+  <div class="sec-tag sr">📍 Find Us</div>
+  <h2 class="sec-title sr">Come visit us in<br><span class="red">Virar West.</span></h2>
+  <div class="contact-grid">
+    <div>
+      <p class="contact-intro sr">Located in the heart of Virar West, inside Sneha Nagar CHS. Easy to find, impossible to forget. Come for the cakes, stay for the love.</p>
+      <div class="contact-cards">
+        <a href="https://www.google.com/maps/place/Jeohappyday+Cake+Shop+at+Virar/@19.4507897,72.8063735,17z" target="_blank" class="contact-card sr"><div class="cc-icon">📍</div><div><div class="cc-label">Address</div><div class="cc-val">Shop No. 9, Sneha Nagar CHS,<br>Virar West, Palghar 401303</div></div><span class="cc-arrow">→</span></a>
+        <a href="tel:08263026822" class="contact-card sr"><div class="cc-icon">📞</div><div><div class="cc-label">Phone</div><div class="cc-val">082630 26822</div></div><span class="cc-arrow">→</span></a>
+        <a href="https://jeohappyday.in" target="_blank" class="contact-card sr"><div class="cc-icon">🌐</div><div><div class="cc-label">Website</div><div class="cc-val">jeohappyday.in</div></div><span class="cc-arrow">→</span></a>
+        <div class="contact-card sr" style="cursor:default;"><div class="cc-icon">🕐</div><div><div class="cc-label">Hours</div><div class="cc-val">Open Daily · 8:00 AM – 12:30 AM<br><span style="color:#16a34a;font-size:12px;font-weight:800;">● Currently Open</span></div></div></div>
+      </div>
+    </div>
+    <div class="map-box sr">
+      <div class="map-box-bg"></div>
+      <div class="map-pin-big">📍</div>
+      <p class="map-address">Shop No. 9, Sneha Nagar CHS<br>Bhaji Gali, Virar West<br>Maharashtra 401303</p>
+      <a href="https://www.google.com/maps/place/Jeohappyday+Cake+Shop+at+Virar/@19.4507897,72.8063735,17z" target="_blank" class="map-link">Open in Google Maps ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">Jeo<span>Happy</span>Day</div>
+      <p class="footer-tagline">ज्योहप्पीडे केक शॉप · विरार<br>Cake & Coffee Cafe · Virar West, Maharashtra</p>
+      <div class="footer-stars">★★★★★<small>4.8 · 519 Reviews</small></div>
+    </div>
+    <div>
+      <div class="footer-col-title">Explore</div>
+      <ul class="footer-links"><li><a href="#about">Our Story</a></li><li><a href="#menu">Menu</a></li><li><a href="#why">Why Us</a></li><li><a href="#reviews">Reviews</a></li></ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Visit</div>
+      <ul class="footer-links"><li><a href="#reservation">Reserve a Table</a></li><li><a href="#contact">Location</a></li><li><a href="tel:08263026822">Call Us</a></li><li><a href="https://jeohappyday.in" target="_blank">Website</a></li></ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links"><li><a href="#">Takeaway</a></li><li><a href="#">Delivery</a></li><li><a href="#">Custom Cakes</a></li><li><a href="#">Catering</a></li></ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2024 Jeohappyday Cake Shop · Virar West, Maharashtra</div>
+    <div class="footer-badges">
+      <span class="footer-badge">🏳️‍🌈 LGBTQ+ Friendly</span>
+      <span class="footer-badge">👩 Women-Owned</span>
+      <span class="footer-badge">⭐ 4.8 Rated</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.sr,.sr-l').forEach(el => obs.observe(el));
+
+function filterMenu(cat, btn) {
+  document.querySelectorAll('.menu-cat').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.menu-card').forEach(card => {
+    if (cat === 'all' || card.getAttribute('data-cat') === cat) {
+      card.style.display = '';
+      card.style.animation = 'fadeUp .4s ease both';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+function handleForm(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.form-submit');
+  btn.textContent = 'Reservation Confirmed! 🎂';
+  btn.style.background = '#16a34a';
+  btn.style.color = 'white';
+  setTimeout(() => {
+    btn.textContent = 'Confirm Reservation →';
+    btn.style.background = '';
+    btn.style.color = '';
+    e.target.reset();
+  }, 4000);
+}
+
+document.querySelectorAll('.menu-card').forEach((card, i) => {
+  card.style.opacity = '0';
+  card.style.transform = 'translateY(20px)';
+  card.style.transition = `opacity .4s ${i * 0.04}s ease, transform .4s ${i * 0.04}s ease, border-color .25s, box-shadow .25s`;
+  setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'none'; }, 80 + i * 40);
+});
+
+const navEl = document.querySelector('nav');
+function updateNavGlass() {
+  if (!navEl) return;
+  navEl.classList.toggle('nav-glass', window.scrollY > 10);
+}
+updateNavGlass();
+window.addEventListener('scroll', updateNavGlass, { passive: true });
+</script>
+</body>
+</html>
